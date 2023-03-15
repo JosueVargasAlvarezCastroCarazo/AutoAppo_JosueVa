@@ -73,9 +73,9 @@ namespace AutoAppo_JosueVa.Views
             
         }
 
-        private void BtnSignUp_Clicked(object sender, EventArgs e)
+        private async void BtnSignUp_Clicked(object sender, EventArgs e)
         {
-
+           await this.Navigation.PushAsync(new AppoSignUpPage());
         }
     }
 }

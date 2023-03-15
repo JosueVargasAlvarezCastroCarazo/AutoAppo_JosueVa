@@ -7,21 +7,23 @@
              BackgroundImageSource="background"
              >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Auto Appo"
-                VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" 
-                 FontSize="Large"
-                   Margin="50,200,50,0"/>
+        <ScrollView>    
+            <StackLayout>
+                <Label Text="Auto Appo"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="CenterAndExpand" 
+                     FontSize="Large"
+                       Margin="50,200,50,0"/>
 
-            <Entry x:Name="TxtEmail" Placeholder="Email" Margin="50,100,50,0" Keyboard="Email" Text="jj@gmail.com"/>
-            <Entry x:Name="TxtPassword" Placeholder="Password" Margin="50,30,50,0" Keyboard="Default" IsPassword="True" Text="Asp128"/>
+                <Entry x:Name="TxtEmail" Placeholder="Email" Margin="50,100,50,0" Keyboard="Email" Text="jj@gmail.com"/>
+                <Entry x:Name="TxtPassword" Placeholder="Password" Margin="50,30,50,0" Keyboard="Default" IsPassword="True" Text="Asp128"/>
 
-            <Button x:Name="BtnLogin" Text="Login" Margin="80,50,80,0" CornerRadius="20" Clicked="Button_Clicked"/>
-            <Button  x:Name="BtnSignUp" Text="Sign Up" Margin="100,10,100,0" CornerRadius="20" Clicked="BtnSignUp_Clicked"/>
+                <Button x:Name="BtnLogin" Text="Login" Margin="80,50,80,0" CornerRadius="20" Clicked="Button_Clicked"/>
+                <Button  x:Name="BtnSignUp" Text="Sign Up" Margin="100,10,100,0" CornerRadius="20" Clicked="BtnSignUp_Clicked"/>
 
-            <Label Text="Olvido la contra" TextColor="Red" Margin="50,100,50,0" HorizontalOptions="Center"/>
+                <Label Text="Olvido la contra" TextColor="Red" Margin="50,100,50,0" HorizontalOptions="Center"/>
 
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

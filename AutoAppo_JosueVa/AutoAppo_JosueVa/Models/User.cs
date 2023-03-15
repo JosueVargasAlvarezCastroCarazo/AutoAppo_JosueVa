@@ -1,4 +1,5 @@
 ﻿using AutoAppo_JosueVa.Services;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,11 @@ namespace AutoAppo_JosueVa.Models
     {
         public User()
         {
-           
+            UserRole = new UserRole();
+            UserStatus = new UserStatus();
         }
 
         public RestRequest Request { get; set; }
-        const string MimeType = "application/json";
-        const string ContentType = "Content-Type";
 
         public int UserId { get; set; }
         public string Name { get; set; }
@@ -45,7 +45,7 @@ namespace AutoAppo_JosueVa.Models
                 Request = new RestRequest(URL,Method.Get);
 
                 Request.AddHeader(APIConnection.ApiKeyName,APIConnection.ApiKey);
-                Request.AddHeader(ContentType, MimeType);
+                Request.AddHeader(APIConnection.ContentType, APIConnection.MimeType);
 
                 RestResponse response = await client.ExecuteAsync(Request);
 
@@ -66,6 +66,53 @@ namespace AutoAppo_JosueVa.Models
                 throw;
             }
         }
+
+
+
+
+        public async Task<bool> AddUser()
+        {
+            try
+            {
+                string RouteSufix = string.Format("Users");
+                string URL = APIConnection.ProductionUrlPrefix + RouteSufix;
+
+                RestClient client = new RestClient(URL);
+
+                Request = new RestRequest(URL, Method.Post);
+
+                Request.AddHeader(APIConnection.ApiKeyName, APIConnection.ApiKey);
+                Request.AddHeader(APIConnection.ContentType, APIConnection.MimeType);
+
+                string Serialize = JsonConvert.SerializeObject(this);
+
+                Request.AddBody(Serialize, APIConnection.MimeType);
+
+                RestResponse response = await client.ExecuteAsync(Request);
+
+                HttpStatusCode statusCode = response.StatusCode;
+
+                if (statusCode == HttpStatusCode.Created)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                string ErrorMsg = ex.Message;
+                throw;
+            }
+        }
+
+
+
+
+
+
 
     }
 }

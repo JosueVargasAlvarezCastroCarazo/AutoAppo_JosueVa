@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoAppo_JosueVa.Views.AppoSignUpPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Creacion de cuenta"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="CenterAndExpand" 
+                    Margin="50,30,50,0"/>
+
+                <Entry x:Name="TxtEmail" Placeholder="Email" Margin="50,30,50,0" Keyboard="Email">
+                    <Entry.Triggers>
+                        <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                            <Setter Property="BackgroundColor" Value="IndianRed"></Setter>
+                        </Trigger>
+                        <Trigger TargetType="Entry" Property="IsFocused" Value="false">
+                            <Setter Property="BackgroundColor" Value="White"></Setter>
+                        </Trigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Entry x:Name="TxtPassword" Placeholder="Password" Margin="50,30,50,0" Keyboard="Default" IsPassword="True"/>
+
+                <Entry x:Name="TxtName" Placeholder="Name" Margin="50,30,50,0" Keyboard="Default"/>
+                <Entry x:Name="TxtPhone" Placeholder="Phone" Margin="50,30,50,0" Keyboard="Numeric"/>
+                <Entry x:Name="TxtCardId" Placeholder="Identification" Margin="50,30,50,0" Keyboard="Default"/>
+                <Entry x:Name="TxtAddress" Placeholder="Address" Margin="50,30,50,0" Keyboard="Default"/>
+
+                <Picker x:Name="PckrUserRole" Title="Rol" Margin="50,30,50,0" ItemDisplayBinding="{Binding UserRoleDescription}"/>
+
+
+                <Button  x:Name="BtnSignUp" Text="Sign Up" Margin="80,50,80,0" CornerRadius="20" Clicked="BtnSignUp_Clicked"/>
+                <Button x:Name="BtnLogin" Text="Login"   Margin="100,10,100,50" CornerRadius="20" Clicked="BtnLogin_Clicked"/>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

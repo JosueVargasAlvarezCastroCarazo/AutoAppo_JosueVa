@@ -7,6 +7,9 @@ namespace AutoAppo_JosueVa.Services
     public static class APIConnection
     {
 
+        public static string MimeType = "application/json";
+        public static string ContentType = "Content-Type";
+
         public static string ProductionUrlPrefix = "http://192.168.0.16:45455/api/";
         public static string TestingUrlPrefix = "http://192.168.0.16:45455/api/";
 

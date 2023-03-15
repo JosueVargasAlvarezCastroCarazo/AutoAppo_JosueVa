@@ -16,7 +16,6 @@ namespace AutoAppo_JosueVa.Droid
         {
             //line for no dark and styles
             AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
-
             base.OnCreate(savedInstanceState);
 
             
