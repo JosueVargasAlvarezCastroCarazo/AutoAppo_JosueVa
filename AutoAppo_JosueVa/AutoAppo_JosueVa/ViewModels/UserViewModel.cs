@@ -1,4 +1,5 @@
-﻿using AutoAppo_JosueVa.Models;
+﻿using AutoAppo_JosueVa.DTO;
+using AutoAppo_JosueVa.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,12 +13,14 @@ namespace AutoAppo_JosueVa.ViewModels
         public UserRole MyUserRole { get; set; }
         public UserStatus MyStatus { get; set; }
         public User MyUser { get; set; }
+        public UserDTO MyUserDTO { get; set; }
 
         public UserViewModel()
         {
             MyStatus = new UserStatus();
             MyUser = new User();
             MyUserRole = new UserRole();
+            MyUserDTO = new UserDTO();
         }
 
         public async Task<bool> ValidateLogin(string email, string password)
@@ -82,9 +85,6 @@ namespace AutoAppo_JosueVa.ViewModels
 
                 MyUser.UserRoleId = userRole;
                 MyUser.UserStatusId = UserStatus;
-                
-                MyUser.UserRole.UserRoleId = userRole;
-                MyUser.UserStatus.UserStatusId = UserStatus;
 
                 bool R = await MyUser.AddUser();
 
@@ -93,6 +93,39 @@ namespace AutoAppo_JosueVa.ViewModels
             catch (Exception)
             {
                 return false;
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
+        }
+
+        public async Task<UserDTO> getUserByEmail(
+            string email
+            )
+        {
+
+            if (IsBusy)
+            {
+                return new UserDTO();
+            }
+            IsBusy = true;
+
+            try
+            {
+                MyUserDTO.Correo = email;
+
+
+                UserDTO R = await MyUserDTO.GetUserByEmail();
+
+                return R;
+            }
+            catch (Exception)
+            {
+                return new UserDTO();
                 throw;
             }
             finally

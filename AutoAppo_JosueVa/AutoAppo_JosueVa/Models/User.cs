@@ -13,8 +13,6 @@ namespace AutoAppo_JosueVa.Models
     {
         public User()
         {
-            UserRole = new UserRole();
-            UserStatus = new UserStatus();
         }
 
         public RestRequest Request { get; set; }
@@ -29,8 +27,8 @@ namespace AutoAppo_JosueVa.Models
         public int UserRoleId { get; set; }
         public int UserStatusId { get; set; }
 
-        public virtual UserRole UserRole { get; set; }
-        public virtual UserStatus UserStatus { get; set; }
+        public virtual UserRole? UserRole { get; set; } = null!;
+        public virtual UserStatus? UserStatus { get; set; } = null!;
 
 
         public async Task<bool> ValidateLogin()
@@ -74,7 +72,7 @@ namespace AutoAppo_JosueVa.Models
         {
             try
             {
-                string RouteSufix = string.Format("Users");
+                string RouteSufix = string.Format("users");
                 string URL = APIConnection.ProductionUrlPrefix + RouteSufix;
 
                 RestClient client = new RestClient(URL);
@@ -109,7 +107,39 @@ namespace AutoAppo_JosueVa.Models
         }
 
 
+        public async Task<bool> GetUserByEmail()
+        {
+            try
+            {
+                string RouteSufix = string.Format("users/GetUserByEmail/{0}", Email);
+                string URL = APIConnection.ProductionUrlPrefix + RouteSufix;
 
+                RestClient client = new RestClient(URL);
+
+                Request = new RestRequest(URL, Method.Get);
+
+                Request.AddHeader(APIConnection.ApiKeyName, APIConnection.ApiKey);
+                Request.AddHeader(APIConnection.ContentType, APIConnection.MimeType);
+
+                RestResponse response = await client.ExecuteAsync(Request);
+
+                HttpStatusCode statusCode = response.StatusCode;
+
+                if (statusCode == HttpStatusCode.Created)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                string ErrorMsg = ex.Message;
+                throw;
+            }
+        }
 
 
 

@@ -41,7 +41,8 @@ namespace AutoAppo_JosueVa.Views
 
                         if (R)
                         {
-                            await DisplayAlert("OK", "Usuario Encontrado", "OK");
+                            Global.GlobalUser = await userViewModel.getUserByEmail(TxtEmail.Text);
+                            await this.Navigation.PushAsync(new AppoOptionsPage());
                         }
                         else
                         {
