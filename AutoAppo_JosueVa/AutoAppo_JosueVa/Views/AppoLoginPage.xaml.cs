@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,7 +36,6 @@ namespace AutoAppo_JosueVa.Views
                     try
                     {
                         UserDialogs.Instance.ShowLoading("Cargando..");
-                        await Task.Delay(2000);
                         bool R = await userViewModel.ValidateLogin(TxtEmail.Text.Trim(), TxtPassword.Text.Trim());
 
                         if (R)
@@ -77,6 +76,18 @@ namespace AutoAppo_JosueVa.Views
         private async void BtnSignUp_Clicked(object sender, EventArgs e)
         {
            await this.Navigation.PushAsync(new AppoSignUpPage());
+        }
+
+        private void SwSeePassword_Toggled(object sender, ToggledEventArgs e)
+        {
+            TxtPassword.IsPassword = !SwSeePassword.IsToggled;
+        }
+
+      
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AppoRecoverPasword());
         }
     }
 }

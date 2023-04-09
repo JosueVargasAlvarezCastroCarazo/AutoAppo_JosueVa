@@ -2,6 +2,7 @@
 using AutoAppo_JosueVa.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace AutoAppo_JosueVa.ViewModels
     public class UserViewModel : BaseViewModel
     {
 
+        public RecoveryCode MyRecoveryCode { get; set; }
         public UserRole MyUserRole { get; set; }
         public UserStatus MyStatus { get; set; }
         public User MyUser { get; set; }
@@ -21,6 +23,7 @@ namespace AutoAppo_JosueVa.ViewModels
             MyUser = new User();
             MyUserRole = new UserRole();
             MyUserDTO = new UserDTO();
+            MyRecoveryCode = new RecoveryCode();
         }
 
         public async Task<bool> ValidateLogin(string email, string password)
@@ -52,6 +55,117 @@ namespace AutoAppo_JosueVa.ViewModels
             }
 
             
+        }
+
+        public async Task<bool> ValidateCode(string email, string code)
+        {
+
+            if (IsBusy)
+            {
+                return false;
+            }
+            IsBusy = true;
+
+            try
+            {
+                MyRecoveryCode.Email = email;
+                MyRecoveryCode.Code = code;
+
+                bool R = await MyRecoveryCode.ValidateCode();
+
+                return R;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
+        }
+
+
+        public bool SendEmail(
+             string pemail,
+            string code)
+        {
+
+            try
+            {
+                var email = new Email();
+                email.SendTo = pemail;
+                email.Subeject = "contra recuperacion josue";
+                email.Message = "su codigo es este: " + code;
+                bool R = email.SendEmail();
+
+                return R;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
+        }
+
+        public async Task<bool> AddCode(
+            string email
+            )
+        {
+
+            if (IsBusy)
+            {
+                return false;
+            }
+            IsBusy = true;
+
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                Enumerable
+                   .Range(65, 26)
+                    .Select(e => ((char)e).ToString())
+                    .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
+                    .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
+                    .OrderBy(e => Guid.NewGuid())
+                    .Take(6)
+                    .ToList().ForEach(e => builder.Append(e));
+                string id = builder.ToString();
+
+                MyRecoveryCode.Email = email;
+                MyRecoveryCode.Code = id;
+
+                bool R = await MyRecoveryCode.AddCode();
+
+
+                if (R)
+                {
+                    R = SendEmail(email, id);
+
+                }
+
+                return R;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
         }
 
 

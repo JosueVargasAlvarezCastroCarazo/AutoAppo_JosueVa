@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoAppo_JosueVa.Views.AppoRecoverPasword">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Recuperar contraseña"
+                HorizontalOptions="CenterAndExpand"  Margin="50,50,50,0"/>
+
+            <Entry x:Name="TxtEmail" Placeholder="Email" Margin="50,100,50,0" Keyboard="Email" Text="josuevargasalvarez@gmail.com"/>
+
+            <Button x:Name="BtnAction" Text="Recuperar Contraseña" Margin="80,50,80,0" CornerRadius="20" Clicked="BtnAction_Clicked"/>
+
+            <Entry x:Name="TxtCode" Placeholder="Ingrese el codigo" Margin="50,100,50,0" />
+            <Entry x:Name="TxtNewPassword" Placeholder="Nueva contraseña" Margin="50,15,50,0" />
+
+
+            <Button x:Name="BtnActionChangePassword" Text="Procesar" Margin="80,50,80,0" CornerRadius="20" Clicked="BtnActionChangePassword_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

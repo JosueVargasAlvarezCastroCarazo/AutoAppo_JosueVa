@@ -15,13 +15,23 @@
                      FontSize="Large"
                        Margin="50,200,50,0"/>
 
-                <Entry x:Name="TxtEmail" Placeholder="Email" Margin="50,100,50,0" Keyboard="Email" Text="jj@gmail.com"/>
-                <Entry x:Name="TxtPassword" Placeholder="Password" Margin="50,30,50,0" Keyboard="Default" IsPassword="True" Text="Asp128"/>
+                <Entry x:Name="TxtEmail" Placeholder="Email" Margin="50,100,50,0" Keyboard="Email" Text="josuevargasalvarez@gmail.com"/>
 
+                <StackLayout Orientation="Horizontal"  Margin="50,30,50,0">
+                    <Entry x:Name="TxtPassword" Placeholder="Password" Keyboard="Default" IsPassword="True" Text="Asp128" HorizontalOptions="FillAndExpand"/>
+                    <Switch x:Name="SwSeePassword" IsToggled="false" Toggled="SwSeePassword_Toggled"/>
+                </StackLayout>
+                
                 <Button x:Name="BtnLogin" Text="Login" Margin="80,50,80,0" CornerRadius="20" Clicked="Button_Clicked"/>
                 <Button  x:Name="BtnSignUp" Text="Sign Up" Margin="100,10,100,0" CornerRadius="20" Clicked="BtnSignUp_Clicked"/>
 
-                <Label Text="Olvido la contra" TextColor="Red" Margin="50,100,50,0" HorizontalOptions="Center"/>
+                <Label Text="Olvido la contra" TextColor="Red" Margin="50,100,50,0" HorizontalOptions="Center" >
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                    </Label.GestureRecognizers>
+                    
+                </Label>
 
             </StackLayout>
         </ScrollView>
