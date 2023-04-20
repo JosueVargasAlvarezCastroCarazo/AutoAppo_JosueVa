@@ -28,14 +28,14 @@ namespace AutoAppo_JosueVa.Views
 
         }
 
-        private void BtnAppointment_Clicked(object sender, EventArgs e)
+        private async void BtnAppointment_Clicked(object sender, EventArgs e)
         {
-
+           await this.Navigation.PushAsync(new MyAppointmentListPage());
         }
 
-        private void BtnUserManagement_Clicked(object sender, EventArgs e)
+        private async void BtnUserManagement_Clicked(object sender, EventArgs e)
         {
-
+            await this.Navigation.PushAsync(new UserManagementPage());
         }
 
         private void BtnSchedule_Clicked(object sender, EventArgs e)

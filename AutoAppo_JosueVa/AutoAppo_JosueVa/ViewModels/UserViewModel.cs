@@ -2,6 +2,7 @@
 using AutoAppo_JosueVa.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -281,13 +282,87 @@ namespace AutoAppo_JosueVa.ViewModels
 
 
 
+        public async Task<ObservableCollection<Appointment>> GetAppointmentListByUser(int id)
+        {
+
+          if (IsBusy)
+            {
+                return new ObservableCollection<Appointment>();
+            }
+            IsBusy = true;
+
+            try
+            {
+
+                return await new Appointment().GetAppointmentListByUser(id);
+
+            }
+            catch (Exception)
+            {
+                return new ObservableCollection<Appointment>();
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
+        }
 
 
 
 
 
+        public async Task<bool> UpdateUser(
+           int id,
+           string email,
+           string password,
+           string name,
+           string phone,
+           string identification,
+           string address,
+           int userRole,
+           int UserStatus = 3
+           )
+        {
+
+            if (IsBusy)
+            {
+                return false;
+            }
+            IsBusy = true;
+
+            try
+            {
+                MyUserDTO.IDUsuario = id;
+                MyUserDTO.Correo = email;
+                MyUserDTO.Contrasennia = password;
+
+                MyUserDTO.Nombre = name;
+                MyUserDTO.NumeroTelefono = phone;
+                MyUserDTO.Cedula = identification;
+                MyUserDTO.Direccion = address;
+
+                MyUserDTO.IDRole = userRole;
+                MyUserDTO.IDEstado = UserStatus;
+
+                bool R = await MyUserDTO.UpdateUser();
+
+                return R;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
 
 
+        }
 
 
 

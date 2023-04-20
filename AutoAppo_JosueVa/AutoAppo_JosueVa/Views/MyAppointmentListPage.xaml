@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoAppo_JosueVa.Views.MyAppointmentListPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Lista de citas"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+
+
+            <ListView x:Name="ListItem" RowHeight="100" SeparatorVisibility="Default">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <ImageCell Text="{Binding Notes}" Detail="{Binding AppoDate}" ImageSource="icon_feed">
+                            
+                        </ImageCell>
+                        
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
